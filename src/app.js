@@ -492,7 +492,7 @@ const sumaDeDosV2 = (num1, num2) => {
   return num1 + num2
 }
 
-const sumaDeDosV3 = (num1=0, num2=0) => num1 + num2
+const sumaDeDosV3 = (num1 = 0, num2 = 0) => num1 + num2
 
 console.log(sumV1)
 console.log(sumV1())
@@ -507,44 +507,44 @@ console.log('con valores por defecto en los parametros', sumaDeDosV3(5))
 
 
 
-const sentenceMaker = (edad='mayor de edad', nombre, ciudad) => `se llama ${nombre} y tiene ${edad} años y vive en ${ciudad}`
+const sentenceMaker = (edad = 'mayor de edad', nombre, ciudad) => `se llama ${nombre} y tiene ${edad} años y vive en ${ciudad}`
 console.log(sentenceMaker(18, 'pepe', 'sevilla'))
 const pepe = {
   nombre: 'pepe',
-  
+
   ciudad: 'Madrid'
 }
 console.log(sentenceMaker(pepe.edad, pepe.nombre, pepe.ciudad))
 
 
 //desestructuracion
-const sentenceMakerV2 = ({edad='mayor de edad', nombre, coche}) => `se llama ${nombre} y tiene ${edad} años y ${coche? ' tiene coche' : ' es ecologista'} `
+const sentenceMakerV2 = ({ edad = 'mayor de edad', nombre, coche }) => `se llama ${nombre} y tiene ${edad} años y ${coche ? ' tiene coche' : ' es ecologista'} `
 
 console.log(sentenceMakerV2(pepe))
 
 
 const ejemplo = (arr) => {
-// cuantos pueden beber?
-console.log(arr)
-let siPueden = 0
+  // cuantos pueden beber?
+  console.log(arr)
+  let siPueden = 0
 
-for (let val of arr) {
-  if (val > 20) {
-    siPueden += 1
+  for (let val of arr) {
+    if (val > 20) {
+      siPueden += 1
+    }
   }
-}
-return siPueden
+  return siPueden
 }
 
 console.log(ejemplo(arraOfAges))
-console.log(ejemplo([5,7,89,54,32,5,58,4,7,54,201]))
+console.log(ejemplo([5, 7, 89, 54, 32, 5, 58, 4, 7, 54, 201]))
 
 const testObj = {}
 const obj2 = {}
 
 
 
-const objMod = (obj, key, value, del=false) => {
+const objMod = (obj, key, value, del = false) => {
   if (del) {
     return delete obj[key]
   }
@@ -564,3 +564,198 @@ console.log(obj2);
 
 console.log(objMod(testObj, 'operador', '', true))
 console.log(testObj);
+
+
+
+//funciones cont
+
+const myFunc = (param1, param2) => { // arrow function
+  //bloque de codigo
+
+  return true //retorna la funcion
+}
+//ejecucion 
+myFunc()
+//ejecucion dentro de un console log
+console.log(myFunc(5, 8))
+
+//LLAMADO dentro de un console log NO EJECUTA LA FUNCION
+console.log(myFunc)
+//el parametro obtiene su valor en el momento en que ejecutamos la funcion 
+
+const ex1 = (name) => {
+  console.log('name---> ', name)// miramos que recibimos
+  return `hola ${name}! JS nos vuelve locos!`
+}
+
+console.log(ex1('Lola'))
+
+const ex2 = (name, age) => {
+  console.log('name---> ', name)// miramos que recibimos
+  console.log('age---> ', age)// miramos que recibimos
+  return `${name} tienes ${age} años?`
+}
+
+console.log(ex2('Barbara', 25))
+
+const wednesdayArr = [5, 78, 4, 2, 8, 1, 8321, 8, 21, 8]
+
+
+//una funcion solo debe tener una fin
+const ex3 = (arr) => {
+  console.log('arr ----> ', arr)
+  const newArr = arr.toSpliced(1, 3) // devuelve un nuevo array sin modificar el original
+  const total = newArr.reduce((a, b) => a + b)
+  let pares = []
+  for (let num of newArr) {
+    if (num % 2 == 0) pares.push(num)
+  }
+  return { datos: newArr, total, pares }
+}
+console.log('wednesdayArr antes ', wednesdayArr)
+console.log(ex3(wednesdayArr))
+console.log('wednesdayArr despues', wednesdayArr)
+
+
+// funciones de orden superior 
+
+//const wednesdayArr = [5,78,4,2,8,1,8321,8,21,8]
+//loop
+const logger = (el) => console.log('logger ---> ', el)
+wednesdayArr.forEach((el) => console.log('forEach --> ', el))
+//se pasa sin () porque lo ejecuta el forEach
+// si se ejecuta mediante un CallBackFunction, NO le pones ()
+wednesdayArr.forEach(logger)
+
+wednesdayArr.forEach((el) => logger(el))
+
+let mod = []
+wednesdayArr.forEach(el => mod.push(el + 1))
+console.log('mod foreach', mod); // undefined porque el forEach NO devuelve informacion
+
+
+for (let val of wednesdayArr) mod.push(val + 1)
+//forEach es un loop y como buen loop que es, NO DEVUELVE INFORMACION
+
+
+
+//MAP ******************************************************************
+// map es un loop que SI devuelve informacion en forma de Array
+
+const modded = wednesdayArr.map(el => el + 5)
+console.log('map modded', modded)
+
+
+const ex5 = (el) => {
+  return 'El numero es ' + el
+}
+const moddedEx5 = wednesdayArr.map(ex5)
+console.log('map modded text ex5', moddedEx5)
+
+//********************************************************** */
+
+// filter
+//  filtra a partir de una condicion y devuelve un nuevo Array
+
+const filteredEven = wednesdayArr.filter((el) => {
+  return el % 2 == 0
+})
+console.log('filteredEven ---> ', filteredEven)
+
+const onlyOdds = el => { // si solo pasa un parametro, no tiene que tener ()
+  // mas de un parametro o ninguno, () obligado
+  return el % 2 != 0
+}
+
+
+const filteredOdds = wednesdayArr.filter(onlyOdds)
+console.log('filteredOdds ---> ', filteredOdds)
+
+const tesatingArr = [...wednesdayArr]
+
+
+
+//reduce
+// si no se le da valor al acumulador, toma el primer valor del array como acumulador
+
+
+
+const reduceOnlyEven = (acc, val) => {
+  if (val % 2 == 0) {
+    return acc + val
+  }
+  return acc + 0
+}
+const reduced = tesatingArr.reduce(reduceOnlyEven, 0)
+
+
+//const reduced = tesatingArr.reduce((acc, val)=> acc+val, 100)
+console.log('reduced con funcion', reduced);
+
+
+// se pueden encadenar
+const sumOfEven = tesatingArr.filter(el => el % 2 == 0).map(el => el + 4).reduce((a, b) => a + b, 0);
+console.log('sumOfEven', sumOfEven)
+
+
+
+
+/*
+1. Que tengo que hacer? --> generar una excusa a partir de los arrays
+2. que datos tengo? --> arrays
+3. estrategia
+X generar numero aleatorio a partir de los arrays---> la excusa es aleatoria
+X extraer de cada array un valor aleatorio
+- concatenar mis valores para generar una oracion
+- mostrar la oracion en el html 
+*/
+let who = ['The dog', 'My grandma', 'The mailman', 'My bird'];
+let action = ['ate', 'peed', 'crushed', 'broke'];
+let what = ['my homework', 'my phone', 'the car'];
+let when = ['before the class', 'when I was sleeping', 'while I was exercising', 'during my lunch', 'while I was praying'];
+
+// principio de programacion funcional
+// cada funcion tiene UN SOLO FIN
+// las funciones deben ser reutilizables
+
+const randomGenerator = (arr) => {
+  return Math.floor(Math.random() * arr.length)
+}
+
+console.log(randomGenerator(who))
+console.log(randomGenerator(what))
+console.log(randomGenerator(when))
+console.log(randomGenerator(action))
+
+const extractsAnArrayValue = (arr) => {
+  return arr[randomGenerator(arr)]
+}
+
+//console.log(extractsAnArrayValue(what, 2));
+
+console.log(extractsAnArrayValue(what));
+
+const concatenate = (itemOne, itemTwo, itemThree, itemFour) => {
+  return `${itemOne} ${itemTwo} ${itemThree} ${itemFour}`
+}
+console.log(concatenate(extractsAnArrayValue(who), extractsAnArrayValue(action), extractsAnArrayValue(what), extractsAnArrayValue(when)));
+
+const generateExcuse = () => {
+  return concatenate(extractsAnArrayValue(who), extractsAnArrayValue(action), extractsAnArrayValue(what), extractsAnArrayValue(when))
+}
+
+const newConcat = (arr1, arr2, arr3, arr4) => {
+  const data = [arr1, arr2, arr3, arr4];
+  // const result = []
+  // data.forEach(el=>result.push(extractsAnArrayValue(el)))
+  const newResult = data.map(el=>extractsAnArrayValue(el) )
+  console.log(newResult);
+  return newResult.join(' ')
+}
+
+console.log(newConcat(who, action, what, when));
+
+
+const dataset = [who, action, what, when]
+
+console.log('array anidado --> ', dataset)
